@@ -33,22 +33,17 @@ data = file.split('&sep')
 ## user what is to be extracted
 pattern = '(SUMMARY:[^\s]+)(.*)(\nTRANSP)'
 
-i = 1 # simple count variable
 new_list = [] # all entries we want to add
 
 for element in data:
     if element != '\n':
-        try:
-            match = re.search(pattern, element).group(2).strip()
+        match = re.search(pattern, element).group(2).strip()
+        if match:
             print('\n###### ', match, ' ######')
-        except:
-            print('Unknown pattern: ', element)
-            print('{} pattern not found - check cal file'.format(i))
-            i = i+1
-        print('relevant? y (YES) / (NO) any other key')
-        user_input = input()
-        if user_input == 'y':
-            new_list.append(element)
+            print('relevant? y (YES) / (NO) any other key')
+            user_input = input()
+            if user_input == 'y':
+                new_list.append(element)
 
 
 ## create new calendar element (ics)
